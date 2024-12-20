@@ -5,11 +5,8 @@ import { Button } from './button';
 import { Link, useNavigate } from 'react-router-dom'
 import { Loader } from './loader';
 const API_URL = import.meta.env.VITE_API_URL;
-interface signupProps{
 
-}
-
-export function SignUp(props:signupProps) {
+export function SignUp() {
   const navigate = useNavigate();
 
 
