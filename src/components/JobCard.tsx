@@ -24,7 +24,7 @@ export function JobCard(props: JobProps) {
   const [jobs, setJobs] = useRecoilState(jobState);
   const token = localStorage.getItem('token')
   function deleteCard(cardId: string) {
-    axios.delete(`${API_URL}${cardId}`, {
+    axios.delete(`${API_URL}job/${cardId}`, {
       headers: {
         token
       }
@@ -57,6 +57,7 @@ export function JobCard(props: JobProps) {
         className="absolute bottom-2 right-2 cursor-pointer p-1 hover:bg-gray-200 rounded-full"
         onClick={(e) => {
           e.stopPropagation();
+          e.preventDefault();
           deleteCard(props.id);
         }}
       >
