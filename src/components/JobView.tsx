@@ -29,7 +29,7 @@ export function JobView() {
     async function fetchJob() {
         const token = localStorage.getItem('token')
         try {
-            const response = await axios.get(`${API_URL}/${jobId}`, {
+            const response = await axios.get(`${API_URL}${jobId}`, {
                 headers: {
                     token
                 },
