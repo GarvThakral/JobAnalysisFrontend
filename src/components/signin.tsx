@@ -41,6 +41,7 @@ export function SignIn() {
     console.log(response)
     if(response.status == 200){
       setSigninState(true);
+      console.log(signinState)
       navigate('/')
       localStorage.setItem('token',response.data.token)
     }

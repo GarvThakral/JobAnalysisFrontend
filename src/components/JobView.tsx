@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Circle } from "../assets/circleIcon";
 import { AiAnalysis } from "./AiAnalyse";
 
 interface JobItem {
