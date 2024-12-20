@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AiAnalysis } from "./AiAnalyse";
+const API_URL = import.meta.env.VITE_API_URL;
 
 interface JobItem {
     company: string;
@@ -28,7 +29,7 @@ export function JobView() {
     async function fetchJob() {
         const token = localStorage.getItem('token')
         try {
-            const response = await axios.get(`http://localhost:3000/job/${jobId}`, {
+            const response = await axios.get(`${API_URL}/${jobId}`, {
                 headers: {
                     token
                 },

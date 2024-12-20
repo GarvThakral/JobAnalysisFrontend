@@ -4,6 +4,7 @@ import { DeleteIcon } from "../assets/deleteIcon";
 import { useRecoilState } from "recoil";
 import { jobState } from "./atoms";
 import { Link } from "react-router-dom";
+const API_URL = import.meta.env.VITE_API_URL;
 
 interface JobProps {
   id: string;
@@ -21,11 +22,11 @@ const statusStyles = {
 
 export function JobCard(props: JobProps) {
   const [jobs, setJobs] = useRecoilState(jobState);
-
+  const token = localStorage.getItem('token')
   function deleteCard(cardId: string) {
-    axios.delete(`http://localhost:3000/job/${cardId}`, {
+    axios.delete(`${API_URL}${cardId}`, {
       headers: {
-        token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjN2ViYTNlNy0xMTM4LTQxMDYtOGYzYy1jMmNlM2NmYzhkNjMiLCJpYXQiOjE3MzQ1MDE3MDV9.S7yacjpHVqF_UZ9FM9AqN1Y4dyTJR3PxuOmhSN-Aqg4"
+        token
       }
     })
     .then(() => setJobs(jobs.filter((item: JobProps) => item.id !== cardId)))
