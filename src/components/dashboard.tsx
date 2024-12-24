@@ -1,74 +1,34 @@
-import { useRecoilState } from "recoil";
-import { jobState, signin } from "./atoms";
-import { useEffect } from "react";
-import axios from "axios";
-import { JobCard } from "./JobCard";
-import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-const API_URL = import.meta.env.VITE_API_URL;
+import { useEffect, useRef } from "react";
+import faceImage from "../assets/face.png"
+// @ts-ignore
+import Typewriter from 'typewriter-effect/dist/core';
+export function DashBoard(){
+    const typeRef = useRef(null);
 
-interface JobItem {
-  company: string;
-  createdAt: string;
-  description: string;
-  id: string;
-  status: "Applied" | "Interviewing" | "Offered";
-  title: string;
-  updatedAt: string;
-  userId: string;
-}
-
-export function DashBoard() {
-  const token = localStorage.getItem('token')
-  const [jobs, setJobs] = useRecoilState(jobState);
-  const [signinState,setSigninState] = useRecoilState(signin);
-  console.log(signinState)
-  async function fetchJobs() {
-    try {
-      console.log(token)
-      const fetchedData = await axios.get(`${API_URL}job/jobs`, {
-        headers: {
-          token:token
+    useEffect(()=>{
+        if(typeRef.current){
+            new Typewriter(typeRef.current, {
+            strings: ['Streamline your job applications with ease.', 'Enhance your resume for maximum impact.','Prepare confidently for interviews.','Gain deep insights into job descriptions.','And much more tailored to your career growth.'],
+            autoStart: true,
+            delay:35,
+            });
         }
-      });
-      console.log(localStorage.getItem('token'))
-      setJobs(fetchedData.data.jobs);
-    } catch (error) {
-      console.error("Error fetching jobs:", error);
-    }
-  }
+    },[])
 
-  useEffect(() => {
-    const token = localStorage.getItem('token')
-    if(token){
-      console.log("Here token")
-      setSigninState(true);
-      fetchJobs();
-    }
-  }, []);
+    return <div className = {`h-screen m-0 p-0 bg-[url('./src/assets/new.jpg')] bg-cover bg-center flex justify-center `}>
+        <div className = "max-w-[80%] flex items-center justify-center">
+            <div className={'text-white border h-[400px] min-w-[600px] flex flex-col justify-around p-8 rounded-lg shadow-[0_0_15px_rgba(52,152,219,0.7)]'}>
+                <span className="text-6xl text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 font-semibold">
+                    Gemini Powered Job Dashboard
+                </span>
+                <p ref={typeRef} className={'text-2xl'}>
+                    
+                </p>
+            </div>
 
-  return (
-    <div className="w-full min-h-screen bg-gradient-to-r from-blue-100 via-blue-200 to-blue-300 flex flex-wrap justify-center gap-6">
-      {signinState ? null:<div className = "h-screen w-screen flex items-center justify-center">Sign in to see your jobs</div>}
-      {jobs.map((item: JobItem) => (
-        <motion.div
-          key={item.id}
-          className="m-4"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.3 }}
-        >
-          <Link to={`/job/${item.id}`} className="no-underline">
-            <JobCard
-              title={item.title}
-              description={item.description}
-              status={item.status}
-              company={item.company}
-              id={item.id}
-            />
-          </Link>
-        </motion.div>
-      ))}
+            <div className = {'size-[1000px] justify-center items-center h-fit hover:scale-105 duration-500 hidden md:flex'}>
+                <img src = {faceImage}></img>
+            </div>
+        </div>
     </div>
-  );
 }

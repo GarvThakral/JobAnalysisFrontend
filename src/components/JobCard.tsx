@@ -34,14 +34,14 @@ export function JobCard(props: JobProps) {
   }
 
   return (
-    <div className="relative rounded-lg shadow-lg w-96 h-80 bg-white m-4 p-6 flex flex-col items-center hover:shadow-xl transition-shadow duration-300 hover:scale-105">
+    <div className="relative border border-transparent shadow-[0_0_15px_rgba(161,29,238,0.8)] rounded-lg  w-96 h-80 bg-black opacity-95 m-4 p-6 flex flex-col items-center hover:shadow-[0_0_15px_rgba(52,152,219,0.7)] transition-shadow duration-300 hover:scale-105 ">
       <Link to={`/job/${props.id}`} className="w-full">
-        <div className="text-center p-2 px-10 text-3xl m-1 border-b-2 border-gray-300">{props.company}</div>
+        <div className="text-center p-2 px-10 text-3xl m-1 border-b-2 border-pink-300-300  text-white">{props.company}</div>
       </Link>
-      <div className="p-1 m-1 text-lg"><i>"{props.title}"</i></div>
-      <div><b>Job description</b></div>
+      <div className="p-1 m-1 text-lg text-transparent bg-clip-text bg-gradient-to-r from-[#1a73e8] via-[#673ab7] to-[#ff80ab]"><i>"{props.title}"</i></div>
+      <div><b className = {'text-white'}>Job description</b></div>
       <div
-        className="px-4 py-1 overflow-hidden text-sm text-gray-600"
+        className="px-4 py-1 overflow-hidden text-sm text-white"
         style={{
           display: "-webkit-box",
           WebkitLineClamp: 4,
