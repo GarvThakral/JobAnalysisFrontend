@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { signin } from "./atoms";
-import geminiLogo from '../assets/Google_Gemini_logo.svg.png'
 
 export function NavBar() {
   const [signinState,setSigninState] = useRecoilState(signin);
@@ -13,7 +12,7 @@ export function NavBar() {
       <div className="w-full h-[70px] shadow-md flex justify-between items-center px-10  bg-gradient-to-b  from-gray-900 to-black fixed z-50">
         <div>
           <Link to  = "/aboutGemini" className =""><div className ="size-20 h-fit mb-3">
-            <img src = {geminiLogo}></img>
+            <img src = {'/geminiLogo.png'}></img>
           </div>
           </Link>
         </div>
