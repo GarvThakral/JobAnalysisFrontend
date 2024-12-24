@@ -17,15 +17,15 @@ export function NavBar() {
           </Link>
         </div>
         <div className = "flex ">
-          <Link to = "/"><div className="text-transparent bg-clip-text bg-gradient-to-r from-[#1a73e8] via-[#673ab7] to-[#ff80ab] text-white m-6 text-xl font-['Roboto'] hover:scale-105  duration-100">
+          <Link to = "/"><div className="text-transparent bg-clip-text bg-gradient-to-r from-[#1a73e8] via-[#673ab7] to-[#ff80ab] m-6 text-xl font-['Roboto'] hover:scale-105  duration-100">
             Home
           </div></Link>
-          <Link to = "/jobs"><div className="text-transparent bg-clip-text bg-gradient-to-r from-[#1a73e8] via-[#673ab7] to-[#ff80ab] text-white m-6 text-xl font-['Roboto'] hover:scale-105  duration-100">
+          <Link to = "/jobs"><div className="text-transparent bg-clip-text bg-gradient-to-r from-[#1a73e8] via-[#673ab7] to-[#ff80ab] m-6 text-xl font-['Roboto'] hover:scale-105  duration-100">
             Jobs
           </div></Link>
 
           <Link to = "/addContent">
-          <div className="text-transparent bg-clip-text bg-gradient-to-r from-[#1a73e8] via-[#673ab7] to-[#ff80ab] text-white m-6 text-xl font-['Roboto'] hover:scale-105 duration-100">
+          <div className="text-transparent bg-clip-text bg-gradient-to-r from-[#1a73e8] via-[#673ab7] to-[#ff80ab] m-6 text-xl font-['Roboto'] hover:scale-105 duration-100">
             Add Content
           </div>
           </Link>
