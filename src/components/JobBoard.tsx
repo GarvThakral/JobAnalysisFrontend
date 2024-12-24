@@ -48,7 +48,7 @@ export function JobBoard() {
   }, []);
 
   return (
-    <div className="w-full min-h-screen bg-[url('./src/assets/bg-3.gif')] bg-fixed bg-contain flex flex-wrap justify-center gap-6">
+    <div className="w-full min-h-screen bg-[url('/bg-3.gif')] bg-fixed bg-contain flex flex-wrap justify-center gap-6">
       {signinState ? null:<div className = "h-screen w-screen flex items-center justify-center">Sign in to see your jobs</div>}
       {jobs.map((item: JobItem) => (
         <motion.div
