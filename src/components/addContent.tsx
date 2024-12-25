@@ -68,7 +68,7 @@ export function AddContent() {
 
   return (
     <div className="h-screen w-screen bg-[url('/bg-3.png')] bg-cover font-['Michroma'] flex justify-center">
-      <div className="h-fit bg-transparent pl-14 pt-32 flex flex-col md:items-start items-center">
+      <div className="h-fit bg-transparent p-14 pt-32 flex flex-col md:items-start items-center">
         <div className="flex flex-col justify-center items-start">
           <label
             htmlFor="companyInput"
