@@ -78,7 +78,7 @@ export function AddContent() {
           </label>
           <input
             id="companyInput"
-            className="border-2 md:w-[400px] lg:w-[500px] w-[500px] outline-none bg-transparent p-3 text-white rounded-3xl duration-500"
+            className="border-2 md:w-[400px] lg:w-[500px] w-[350px] outline-none bg-transparent p-3 text-white rounded-3xl duration-500"
             placeholder="Google"
             onChange={(e) => setCompanyName(e.target.value)}
           />
@@ -92,7 +92,7 @@ export function AddContent() {
           </label>
           <input
             id="jobInput"
-            className="border-2 md:w-[400px] lg:w-[500px] w-[500px] outline-none bg-transparent p-3 text-white rounded-3xl duration-500"
+            className="border-2 md:w-[400px] lg:w-[500px] w-[350px] outline-none bg-transparent p-3 text-white rounded-3xl duration-500"
             placeholder='"UI/UX Designer"'
             onChange={(e) => setJobTitle(e.target.value)}
           />
@@ -106,7 +106,7 @@ export function AddContent() {
           </label>
           <textarea
             id="jobDescInput"
-            className="border-2 md:w-[400px] lg:w-[500px] w-[500px] outline-none bg-transparent p-3 text-white rounded-3xl resize-y duration-500"
+            className="border-2 md:w-[400px] lg:w-[500px] w-[350px] outline-none bg-transparent p-3 text-white rounded-3xl resize-y duration-500"
             placeholder={placeHolderDesc}
             onChange={(e) => setJobDescription(e.target.value)}
           ></textarea>
