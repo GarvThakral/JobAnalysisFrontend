@@ -71,11 +71,7 @@ export function JobCard(props: JobProps) {
       </div>}
       <div
         className="absolute bottom-2 right-2 cursor-pointer p-1 hover:bg-gray-200 rounded-full"
-        onClick={(e) => {
-          e.stopPropagation();
-          e.preventDefault();
-          deleteCard(props.id);
-        }}
+        
       >
         <DeleteIcon />
       </div>
