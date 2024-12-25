@@ -5,6 +5,7 @@ import { useRecoilState } from "recoil";
 import { signin } from "./atoms";
 // @ts-ignore
 import Typewriter from 'typewriter-effect/dist/core';
+import { Loader } from './loader';
 const API_URL = import.meta.env.VITE_API_URL;
 
 
@@ -23,8 +24,6 @@ export function SignIn() {
   },[])
   const navigate = useNavigate();
   const signinRef = useRef<HTMLDivElement>(null);
-  const [loader,setLoaderState] = useState(false)
-  console.log(loader)
   
   const [signinState,setSigninState] = useRecoilState(signin);
 
@@ -42,27 +41,30 @@ export function SignIn() {
       document.removeEventListener("mousedown",handleClickListener)
     }
   },[])
-  
+  const [loader,setLoader] = useState(false);
   async function signUserIn(){
-    console.log(API_URL)
-    setLoaderState(true)
-    const response = await axios.post(`${API_URL}user/signin`,{
-      username,password
-    })
-    setLoaderState(false)
-    console.log(response)
-    if(response.status == 200){
-      setSigninState(true);
-      console.log(signinState)
-      navigate('/')
-      localStorage.setItem('token',response.data.token)
+    setLoader(true);
+    try{
+      const response = await axios.post(`${API_URL}user/signin`,{
+        username,password
+      })
+      setLoader(false);
+      console.log(response)
+      if(response.status == 200){
+        setSigninState(true);
+        console.log(signinState)
+        navigate('/')
+        localStorage.setItem('token',response.data.token)
+      }
+    }catch(e){
+      
     }
   }
   
 
   return (
     <div className="h-screen w-screen bg-[url('/lineArt.jpg')] bg-cover font-['Michroma'] flex justify-center pt-32 ">
-
+        {loader ? <Loader/>:null}
         <div className="h-fit bg-transparent sm:p-20 p-10 flex flex-col items-center border rounded-3xl justify-center">
           <div className="flex flex-col justify-center items-start ">
             <label

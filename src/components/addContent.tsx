@@ -8,6 +8,7 @@ import axios from "axios";
 import Select from "react-select";
 import { useEffect, useState } from "react";
 import { JobCard } from "./JobCard";
+import { Loader } from "./loader";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -37,11 +38,12 @@ export function AddContent() {
     value: "Applied",
     label: "Applied",
   });
-
+  const [loader,setLoader] = useState(false);
   async function handleAddJob() {
     const token = localStorage.getItem("token");
     console.log(token);
     try {
+      setLoader(true);
       const response = await axios.post(
         `${API_URL}job/create`,
         {
@@ -56,6 +58,7 @@ export function AddContent() {
           },
         }
       );
+      setLoader(false);
       console.log(response);
     } catch (e) {
       console.log(e);
@@ -68,6 +71,7 @@ export function AddContent() {
 
   return (
     <div className="h-screen w-screen bg-[url('/bg-3.png')] bg-cover font-['Michroma'] flex justify-center">
+      {loader ? <Loader/>:null}
       <div className="h-fit bg-transparent p-14 pt-32 flex flex-col md:items-start items-center">
         <div className="flex flex-col justify-center items-start">
           <label

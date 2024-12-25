@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
-import { Input } from './input';
-import { Button } from './button';
 import { Link, useNavigate } from 'react-router-dom'
 import { Loader } from './loader';
 // @ts-ignore
@@ -45,21 +43,24 @@ export function SignUp() {
   async function signUserUp(){
     console.log(API_URL)
     setLoaderState(true)
-    const response = await axios.post(`${API_URL}user/signup`,{
-      username,email,password
-    })
-    setLoaderState(false)
-    if(response.status == 200){
-      navigate('/')
+    try{
+      const response = await axios.post(`${API_URL}user/signup`,{
+        username,email,password
+      })
+      setLoaderState(false)
+      if(response.status == 200){
+        navigate('/')
+      }
+    }catch(e){
+      console.log(e);
+      setLoaderState(false)
     }
 
-    console.log(response);
-    localStorage.setItem('token',response.data.token)
   }
   return (
     <div className="h-screen w-screen bg-[url('/lineArt.jpg')] bg-cover font-['Michroma'] flex justify-center pt-32 ">
-
-        <div className="h-fit bg-transparent sm:p-20 p-10 flex flex-col items-center border rounded-3xl justify-center">
+      {loader ? <Loader/>:null}
+        <div className="h-fit bg-transparent sm:px-20 p-5 flex flex-col items-center border rounded-3xl justify-center">
           <div className="flex flex-col justify-center items-start">
             <label
               htmlFor="companyInput"

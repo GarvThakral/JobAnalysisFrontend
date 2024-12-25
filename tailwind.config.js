@@ -6,7 +6,19 @@ export default {
   ],
   theme: {
     extend: {
-      
+      animation: {
+        'rotate-slow': 'rotate_3922 1.2s linear infinite',
+      },
+      keyframes: {
+        rotate_3922: {
+          '0%': {
+            transform: 'translate(-50%, -50%) rotate(0deg)',
+          },
+          '100%': {
+            transform: 'translate(-50%, -50%) rotate(360deg)',
+          },
+        },
+      },
     },
   },
   plugins: [],
