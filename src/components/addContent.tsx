@@ -179,6 +179,7 @@ export function AddContent() {
             description={jobDescription || placeHolderDesc}
             status={(selectedOption?.value as "Applied" | "Interviewing" | "Offered") || "Applied"}
             id={"123"}
+            link = {false}
           ></JobCard>
         </div>
       ) : null}

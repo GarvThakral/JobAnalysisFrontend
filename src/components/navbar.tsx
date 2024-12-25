@@ -36,10 +36,9 @@ export function NavBar() {
             <div className="text-white hover:scale-150 duration-100 sm:hidden top-0 right-0 fixed m-6 mr-9" onClick = {()=>setToggleShort(c=>!c)}>
               <HamburgerIcon/>  
             </div>
-            <Link to  = "/aboutGemini" className ="" onClick = {()=>setToggleShort(false)}><div className ="size-20 h-fit mb-3">
+            <div className ="size-20 h-fit mb-3 cursor-default">
               <img src = {'/geminiLogo.png'}></img>
             </div>
-            </Link>
             <Link to = "/" onClick = {()=>setToggleShort(false)}><div className="text-transparent bg-clip-text bg-gradient-to-r from-[#1a73e8] via-[#673ab7] to-[#ff80ab] m-6 text-xl font-['Roboto'] hover:scale-105  duration-100">
               Home
             </div></Link>
@@ -71,10 +70,9 @@ export function NavBar() {
 
 
         <div>
-          <Link to  = "/aboutGemini" className =""><div className ="size-20 h-fit mb-3">
+          <div className ="size-20 h-fit mb-3 cursor-default">
             <img src = {'/geminiLogo.png'}></img>
           </div>
-          </Link>
         </div>
         <div className = "flex ">
           <Link to = "/"><div className="text-transparent bg-clip-text bg-gradient-to-r from-[#1a73e8] via-[#673ab7] to-[#ff80ab] m-6 text-xl font-['Roboto'] hover:scale-105  duration-100 hidden sm:block">
