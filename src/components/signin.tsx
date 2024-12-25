@@ -1,9 +1,6 @@
-import { Button } from "./button";
-import { Input } from "./input";
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
-import { Link, useNavigate } from "react-router-dom";
-import { Loader } from "./loader";
+import {  useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { signin } from "./atoms";
 const API_URL = import.meta.env.VITE_API_URL;
@@ -13,6 +10,7 @@ export function SignIn() {
   const navigate = useNavigate();
   const signinRef = useRef<HTMLDivElement>(null);
   const [loader,setLoaderState] = useState(false)
+  console.log(loader)
   
   const [signinState,setSigninState] = useRecoilState(signin);
 
