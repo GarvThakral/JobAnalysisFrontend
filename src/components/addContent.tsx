@@ -80,7 +80,6 @@ export function AddContent() {
             id="companyInput"
             className="border-2 md:w-[400px] lg:w-[500px] w-[500px] outline-none bg-transparent p-3 text-white rounded-3xl duration-500"
             placeholder="Google"
-            value={companyName}
             onChange={(e) => setCompanyName(e.target.value)}
           />
         </div>
@@ -95,7 +94,6 @@ export function AddContent() {
             id="jobInput"
             className="border-2 md:w-[400px] lg:w-[500px] w-[500px] outline-none bg-transparent p-3 text-white rounded-3xl duration-500"
             placeholder='"UI/UX Designer"'
-            value={jobTitle}
             onChange={(e) => setJobTitle(e.target.value)}
           />
         </div>
@@ -110,7 +108,6 @@ export function AddContent() {
             id="jobDescInput"
             className="border-2 md:w-[400px] lg:w-[500px] w-[500px] outline-none bg-transparent p-3 text-white rounded-3xl resize-y duration-500"
             placeholder={placeHolderDesc}
-            value={jobDescription}
             onChange={(e) => setJobDescription(e.target.value)}
           ></textarea>
         </div>
@@ -161,7 +158,7 @@ export function AddContent() {
             ]}
           />
         </div>
-        <div className="border-2 md:w-[300px] lg:w-[400px] w-[200px] outline-none bg-black bg-opacity-80 p-3 text-white rounded-3xl resize-y duration-500 my-5 flex justify-center">
+        <div className="border-2 md:w-[300px] lg:w-[400px] w-[200px] outline-none bg-black bg-opacity-80 p-3 text-white rounded-3xl resize-y duration-500 my-5 flex justify-center cursor-pointer">
           <button
             className="bg-clip-text text-transparent bg-gradient-to-r from-[#1a73e8] via-[#673ab7] to-[#ff80ab]"
             type="submit"
