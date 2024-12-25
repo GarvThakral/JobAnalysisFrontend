@@ -5,3 +5,12 @@
     max-height: 80vh; /* Maximum height set to 80% of the viewport height */
     overflow-y: auto; /* Enables vertical scrolling when content overflows */
 }
+/* Hide the scrollbar in webkit browsers (Chrome, Safari, Edge) */
+textarea::-webkit-scrollbar {
+display: none;
+}
+
+/* Hide the scrollbar in Firefox */
+textarea {
+scrollbar-width: none;
+}

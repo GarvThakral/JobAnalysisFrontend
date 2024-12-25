@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const API_URL = import.meta.env.VITE_API_URL;
 
 interface JobProps {
-  id: string;
+  id : string;
   title: string;
   description: string;
   company: string;
@@ -34,7 +34,7 @@ export function JobCard(props: JobProps) {
   }
 
   return (
-    <div className="relative border border-transparent shadow-[0_0_15px_rgba(161,29,238,0.8)] rounded-lg  w-96 h-80 bg-black opacity-95 m-4 p-6 flex flex-col items-center hover:shadow-[0_0_15px_rgba(52,152,219,0.7)] transition-shadow duration-300 hover:scale-105 ">
+    <div className="relative font-['Michroma'] border border-transparent shadow-[0_0_15px_rgba(161,29,238,0.8)] rounded-lg  w-96 h-80 bg-black opacity-95 m-4 p-6 flex flex-col items-center hover:shadow-[0_0_15px_rgba(52,152,219,0.7)] transition-shadow duration-300 hover:scale-105 ">
       <Link to={`/job/${props.id}`} className="w-full">
         <div className="text-center p-2 px-10 text-3xl m-1 border-b-2 border-pink-300-300  text-white">{props.company}</div>
       </Link>

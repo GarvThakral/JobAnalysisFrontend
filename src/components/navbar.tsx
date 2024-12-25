@@ -33,24 +33,39 @@ export function NavBar() {
       <div className="w-full h-[70px] shadow-md flex justify-between items-center px-10  bg-gradient-to-b  from-gray-900 to-black fixed z-50">
         {/* Hidden Nav */}
         {toggleShort ? <div className = {'top-0 right-0 w-[100%] h-[100%] fixed bg-opacity-90 bg-black flex flex-col items-center justify-center'}>
-          <div>
-            <Link to  = "/aboutGemini" className =""><div className ="size-20 h-fit mb-3">
+            <div className="text-white hover:scale-150 duration-100 sm:hidden top-0 right-0 fixed m-6 mr-9" onClick = {()=>setToggleShort(c=>!c)}>
+              <HamburgerIcon/>  
+            </div>
+            <Link to  = "/aboutGemini" className ="" onClick = {()=>setToggleShort(false)}><div className ="size-20 h-fit mb-3">
               <img src = {'/geminiLogo.png'}></img>
             </div>
             </Link>
-          </div>
-            <Link to = "/"><div className="text-transparent bg-clip-text bg-gradient-to-r from-[#1a73e8] via-[#673ab7] to-[#ff80ab] m-6 text-xl font-['Roboto'] hover:scale-105  duration-100">
+            <Link to = "/" onClick = {()=>setToggleShort(false)}><div className="text-transparent bg-clip-text bg-gradient-to-r from-[#1a73e8] via-[#673ab7] to-[#ff80ab] m-6 text-xl font-['Roboto'] hover:scale-105  duration-100">
               Home
             </div></Link>
-            <Link to = "/jobs"><div className="text-transparent bg-clip-text bg-gradient-to-r from-[#1a73e8] via-[#673ab7] to-[#ff80ab] m-6 text-xl font-['Roboto'] hover:scale-105  duration-100">
+            <Link to = "/jobs" onClick = {()=>setToggleShort(false)}><div className="text-transparent bg-clip-text bg-gradient-to-r from-[#1a73e8] via-[#673ab7] to-[#ff80ab] m-6 text-xl font-['Roboto'] hover:scale-105  duration-100">
               Jobs
             </div></Link>
 
-            <Link to = "/addContent">
+            <Link to = "/addContent" onClick = {()=>setToggleShort(false)}>
             <div className="text-transparent bg-clip-text bg-gradient-to-r from-[#1a73e8] via-[#673ab7] to-[#ff80ab] m-6 text-xl font-['Roboto'] hover:scale-105 duration-100">
               Add Content
             </div>
             </Link>
+            {signinState ? 
+              <Link to = "/" onClick = {()=>setToggleShort(false)}>
+              <div className="text-white m-6 text-xl font-['Roboto'] hover:scale-105 duration-100" onClick = {()=>signout()}>
+                Sign out
+              </div>
+              </Link>:
+
+              <Link to = "/signin" onClick = {()=>setToggleShort(false)}>
+              <div className="text-transparent bg-clip-text bg-gradient-to-r from-[#1a73e8] via-[#673ab7] to-[#ff80ab] m-6 text-xl font-['Roboto'] hover:scale-105 duration-100">
+                Sign in
+              </div>
+              </Link>
+            
+            }
         </div>:null}
 
 
@@ -78,7 +93,7 @@ export function NavBar() {
         <div className="flex items-center">
           {signinState ? 
           <Link to = "/">
-          <div className="text-white m-6 text-xl font-['Roboto'] hover:scale-105 duration-100" onClick = {()=>signout()}>
+          <div className="text-white m-6 text-xl font-['Roboto'] hover:scale-105 duration-100 hidden sm:block" onClick = {()=>signout()}>
             Sign out
           </div>
           </Link>:
@@ -90,9 +105,10 @@ export function NavBar() {
           </Link>
           
           }
-          <div className="text-white hover:scale-150 duration-100 sm:hidden " onClick = {()=>setToggleShort(c=>!c)}>
+          {toggleShort ? null:<div className="text-white hover:scale-150 duration-100 sm:hidden " onClick = {()=>setToggleShort(c=>!c)}>
             <HamburgerIcon/>  
-          </div>
+          </div> }
+          
         </div>
       </div>
     );
