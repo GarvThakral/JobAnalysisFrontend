@@ -11,16 +11,21 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 export function SignIn() {
   const typeRef = useRef(null);
-  
-      useEffect(()=>{
-          if(typeRef.current){
-              new Typewriter(typeRef.current, {
-              strings: ['Dont have an account ?'],
-              autoStart: true,
-              delay:35,
-              pauseFor:3500
-              });
-          }
+
+  const [usernameError,setUsernameError] = useState(false); 
+  const [userError,setUserError] = useState(false); 
+  const [passwordError,setPasswordError] = useState(false); 
+
+  useEffect(()=>{
+      if(typeRef.current){
+          new Typewriter(typeRef.current, {
+          strings: ['Dont have an account ?'],
+          loop:true,
+          autoStart: true,
+          delay:35,
+          pauseFor:3500
+          });
+      }
   },[])
   const navigate = useNavigate();
   const signinRef = useRef<HTMLDivElement>(null);
@@ -43,6 +48,9 @@ export function SignIn() {
   },[])
   const [loader,setLoader] = useState(false);
   async function signUserIn(){
+    setUsernameError(false);
+    setPasswordError(false);
+
     setLoader(true);
     try{
       const response = await axios.post(`${API_URL}user/signin`,{
@@ -55,9 +63,21 @@ export function SignIn() {
         console.log(signinState)
         navigate('/')
         localStorage.setItem('token',response.data.token)
+      }else if(response.status == 203){
+        const issues = response.data.issues;
+        issues.forEach((e: any) => {
+          if (e.path.includes("username")) {
+            setUsernameError(true);
+          } 
+          else if (e.path.includes("password")) {
+            setPasswordError(true);
+          } 
+        });
+      }else if(response.status == 204){
+        setUserError(true);
       }
     }catch(e){
-      
+      console.log(e);
     }
   }
   
@@ -65,7 +85,7 @@ export function SignIn() {
   return (
     <div className="h-screen w-screen bg-[url('/lineArt.jpg')] bg-cover font-['Michroma'] flex justify-center pt-32 ">
         {loader ? <Loader/>:null}
-        <div className="h-fit bg-transparent sm:p-20 p-10 flex flex-col items-center border rounded-3xl justify-center">
+        <div className="h-fit bg-transparent sm:p-15 p-10 flex flex-col items-start border rounded-3xl justify-center">
           <div className="flex flex-col justify-center items-start ">
             <label
               htmlFor="companyInput"
@@ -79,6 +99,8 @@ export function SignIn() {
               placeholder="John Doe"
               onChange={(e) => setUsername(e.target.value)}
             />
+            {usernameError ? <span className = "text-red-600">Username needs to be between 3-16 words</span>:null}
+            {userError ? <span className = "text-red-600">User does not exist</span>:null}
           </div>
           <div className="flex flex-col justify-center items-start">
             <label
@@ -93,21 +115,23 @@ export function SignIn() {
               placeholder='"xyz@gmail.com"'
               onChange={(e) => setPassword(e.target.value)}
             />
+            {passwordError ? <span className = "text-red-600">Password needs to be between 3-16 words</span>:null}
           </div>
-          <div className="border-2 md:w-[300px] lg:w-[400px] w-[200px] outline-none bg-black bg-opacity-80 p-3 text-white rounded-3xl resize-y duration-500 my-5 flex justify-center cursor-pointer">
-            <button
-              className="bg-clip-text text-transparent bg-gradient-to-r from-[#1a73e8] via-[#673ab7] to-[#ff80ab]"
-              type="submit"
-              onClick={() => signUserIn()}
-            >
-              Sign In
-            </button>
-          </div>
-          <span ref = {typeRef} className = {"text-white p-5"}>
+          <div className = {'flex flex-col items-center self-center'}>
+            <div className="border-2 md:w-[200px] lg:w-[200px] w-[200px] outline-none bg-black bg-opacity-80 p-3 text-white rounded-3xl resize-y duration-500 my-5 flex justify-center cursor-pointer">
+              <button
+                className="bg-clip-text text-transparent bg-gradient-to-r from-[#1a73e8] via-[#673ab7] to-[#ff80ab]"
+                type="submit"
+                onClick={() => signUserIn()}
+              >
+                Sign In
+              </button>
+            </div>
+            <span ref = {typeRef} className = {"text-white p-5"}>
 
-          </span>
-          <Link to = "/signup"><span className = {'text-purple-700 cursor-pointer p-5'}>Sign up ?</span></Link>
-          
+            </span>
+            <Link to = "/signup"><span className = {'text-purple-700 cursor-pointer p-5'}>Sign In ?</span></Link>
+          </div>
         </div>
     </div>
   );
