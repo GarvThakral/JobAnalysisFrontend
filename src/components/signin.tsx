@@ -1,12 +1,26 @@
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
-import {  useNavigate } from "react-router-dom";
+import {  Link, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { signin } from "./atoms";
+// @ts-ignore
+import Typewriter from 'typewriter-effect/dist/core';
 const API_URL = import.meta.env.VITE_API_URL;
 
 
 export function SignIn() {
+  const typeRef = useRef(null);
+  
+      useEffect(()=>{
+          if(typeRef.current){
+              new Typewriter(typeRef.current, {
+              strings: ['Dont have an account ?'],
+              autoStart: true,
+              delay:35,
+              pauseFor:3500
+              });
+          }
+  },[])
   const navigate = useNavigate();
   const signinRef = useRef<HTMLDivElement>(null);
   const [loader,setLoaderState] = useState(false)
@@ -50,7 +64,7 @@ export function SignIn() {
     <div className="h-screen w-screen bg-[url('/lineArt.jpg')] bg-cover font-['Michroma'] flex justify-center pt-32 ">
 
         <div className="h-fit bg-transparent sm:p-20 p-10 flex flex-col items-center border rounded-3xl justify-center">
-          <div className="flex flex-col justify-center items-start">
+          <div className="flex flex-col justify-center items-start ">
             <label
               htmlFor="companyInput"
               className="text-white p-3 text-xl animate-pulse"
@@ -84,9 +98,14 @@ export function SignIn() {
               type="submit"
               onClick={() => signUserIn()}
             >
-              Create Job
+              Sign In
             </button>
           </div>
+          <span ref = {typeRef} className = {"text-white p-5"}>
+
+          </span>
+          <Link to = "/signup"><span className = {'text-purple-700 cursor-pointer p-5'}>Sign up ?</span></Link>
+          
         </div>
     </div>
   );

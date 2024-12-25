@@ -91,7 +91,7 @@ export function JobBoard() {
               status={item.status}
               company={item.company}
               id={item.id}
-              link = {false}
+              link = {true}
 
             />
           </Link>

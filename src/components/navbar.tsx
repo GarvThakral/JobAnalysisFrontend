@@ -81,12 +81,12 @@ export function NavBar() {
           <Link to = "/jobs"><div className="text-transparent bg-clip-text bg-gradient-to-r from-[#1a73e8] via-[#673ab7] to-[#ff80ab] m-6 text-xl font-['Roboto'] hover:scale-105  duration-100 hidden sm:block">
             Jobs
           </div></Link>
-
-          <Link to = "/addContent">
+            {signinState ? <Link to = "/addContent">
           <div className="text-transparent bg-clip-text bg-gradient-to-r from-[#1a73e8] via-[#673ab7] to-[#ff80ab] m-6 text-xl font-['Roboto'] hover:scale-105 duration-100 hidden sm:block">
             Add Content
           </div>
-          </Link>
+          </Link>:null}
+          
         </div>
         <div className="flex items-center">
           {signinState ? 

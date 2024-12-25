@@ -4,9 +4,23 @@ import { Input } from './input';
 import { Button } from './button';
 import { Link, useNavigate } from 'react-router-dom'
 import { Loader } from './loader';
+// @ts-ignore
+import Typewriter from 'typewriter-effect/dist/core';
 const API_URL = import.meta.env.VITE_API_URL;
 
 export function SignUp() {
+  const typeRef = useRef(null);
+    
+        useEffect(()=>{
+            if(typeRef.current){
+                new Typewriter(typeRef.current, {
+                strings: ['Already a user ?'],
+                autoStart: true,
+                delay:35,
+                pauseFor:3500
+                });
+            }
+  },[])
   const navigate = useNavigate();
 
 
@@ -43,17 +57,66 @@ export function SignUp() {
     localStorage.setItem('token',response.data.token)
   }
   return (
-    <div className="flex justify-center items-center min-h-screen col-span-10 fixed top-0 left-0 w-screen bg-slate-50 bg-opacity-50 backdrop-blur-sm">
-      {loader ? <Loader/>:null}
-      
-      <div ref = {signupRef} className = {"bg-[#fffefe] w-[95%] max-w-[400px] sm:max-w-[450px] md:max-w-[500px] lg:max-w-[600px] h-[600px] md:h-[500px] sm:h-[400px] flex flex-col items-center justify-between drop-shadow-lg py-8 px-6 rounded-xl"}>
-        <span className = {"text-lg sm:text-xl text-center"}>Sign up Page</span>
-        <Input variant = {"secondary"} size = {"lg"} placeholder="username" onChange={(e:React.ChangeEvent<HTMLInputElement>)=>{setUsername(e.target.value)}}/>        
-        <Input variant = {"secondary"} size = {"lg"} placeholder="email" onChange={(e:React.ChangeEvent<HTMLInputElement>)=>{setEmail(e.target.value)}}/>        
-        <Input variant = {"secondary"} size = {"lg"} placeholder="password" onChange={(e:React.ChangeEvent<HTMLInputElement>)=>{setPassword(e.target.value)}}/>   
-        <Button variant = {"primary"} size = {"lg"} text = {"Sign up"} onClick ={()=>{signUserUp()}}/>     
-        <span>Have an account ?<Link to = "/signin"><span className = "text-purple-500">Sign in </span></Link>instead</span>
-      </div>
+    <div className="h-screen w-screen bg-[url('/lineArt.jpg')] bg-cover font-['Michroma'] flex justify-center pt-32 ">
+
+        <div className="h-fit bg-transparent sm:p-20 p-10 flex flex-col items-center border rounded-3xl justify-center">
+          <div className="flex flex-col justify-center items-start">
+            <label
+              htmlFor="companyInput"
+              className="text-white p-3 text-xl animate-pulse"
+            >
+              Enter Your Username :
+            </label>
+            <input
+              id="companyInput"
+              className="border-2 md:w-[300px] lg:w-[400px] w-[300px] outline-none bg-transparent p-3 text-white rounded-3xl duration-500"
+              placeholder="John Doe"
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </div>
+          <div className="flex flex-col justify-center items-start">
+            <label
+              htmlFor="companyInput"
+              className="text-white p-3 text-xl animate-pulse"
+            >
+              Enter Your Email :
+            </label>
+            <input
+              id="companyInput"
+              className="border-2 md:w-[300px] lg:w-[400px] w-[300px] outline-none bg-transparent p-3 text-white rounded-3xl duration-500"
+              placeholder="John Doe"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="flex flex-col justify-center items-start">
+            <label
+              htmlFor="jobInput"
+              className="text-white p-3 text-xl animate-pulse"
+            >
+              Enter Your Password : 
+            </label>
+            <input
+              id="jobInput"
+              className="border-2 md:w-[300px] lg:w-[400px] w-[300px] outline-none bg-transparent p-3 text-white rounded-3xl duration-500"
+              placeholder='"xyz@gmail.com"'
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <div className="border-2 md:w-[300px] lg:w-[400px] w-[200px] outline-none bg-black bg-opacity-80 p-3 text-white rounded-3xl resize-y duration-500 my-5 flex justify-center cursor-pointer">
+            <button
+              className="bg-clip-text text-transparent bg-gradient-to-r from-[#1a73e8] via-[#673ab7] to-[#ff80ab]"
+              type="submit"
+              onClick={() => signUserUp()}
+            >
+              Create Job
+            </button>
+          </div>
+          <span ref = {typeRef} className='text-white p-5'>
+
+          </span>
+          <Link to = "/signin"><span className = {'text-purple-700 cursor-pointer'}>Sign up ?</span></Link>
+
+        </div>
     </div>
   );
   }
