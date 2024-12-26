@@ -13,6 +13,12 @@ export function NavBar() {
     navigate('/');
   }
   useEffect(() => {
+    const token = (localStorage.getItem('token'))
+    if(token){
+      setSigninState(true);
+    }else{
+      setSigninState(false);
+    }
     const handleResize = () => {
       if (window.innerWidth >= 640) {
         setToggleShort(false); // Close the hidden nav when screen size is >= sm

@@ -1,6 +1,5 @@
 import { useRecoilState } from "recoil";
 import {
-  companyNameState,
   jobTitleState,
   jobDescriptionState,
   signin,
@@ -15,9 +14,10 @@ import { useNavigate } from "react-router-dom";
 const API_URL = import.meta.env.VITE_API_URL;
 
 export function AddContent() {
-  
   const [toggleShort, setToggleShort] = useState(true);
   const [signinState] = useRecoilState(signin);
+  const [companyNameError,setCompanyNameError] = useState(false);
+  const [jobNameError,setJobNameError] = useState(false);
   
   const navigate = useNavigate();
   
@@ -37,7 +37,7 @@ export function AddContent() {
   }, [signinState]); // Add signinState as a dependency
   
 
-  const [companyName, setCompanyName] = useRecoilState(companyNameState);
+  const [companyName, setCompanyName] = useState('');
   const [jobTitle, setJobTitle] = useRecoilState(jobTitleState);
   const [jobDescription, setJobDescription] = useRecoilState(
     jobDescriptionState
@@ -54,9 +54,11 @@ export function AddContent() {
   async function handleAddJob() {
     const token = localStorage.getItem("token");
     console.log(token);
-    try {
-      setLoader(true);
-      const response = await axios.post(
+    if(!jobNameError && !companyNameError){
+
+      try {
+        setLoader(true);
+        const response = await axios.post(
         `${API_URL}job/create`,
         {
           title: jobTitle,
@@ -79,8 +81,13 @@ export function AddContent() {
     setJobTitle("");
     setJobDescription("");
     setSelectedOption({ value: "Applied", label: "Applied" }); 
+  }else{
+    setLoader(true)
+    setTimeout(()=>setLoader(false),2000);
+    return
   }
-
+  }
+  
   return (
     
     <div className="h-screen w-screen bg-[url('/bg-3.png')] bg-cover font-['Michroma'] flex justify-center">
@@ -97,8 +104,20 @@ export function AddContent() {
             id="companyInput"
             className="border-2 md:w-[400px] lg:w-[500px] w-[350px] outline-none bg-transparent p-3 text-white rounded-3xl duration-500"
             placeholder="Google"
-            onChange={(e) => setCompanyName(e.target.value)}
+            onChange={(e) => {
+              if (e.target.value.length > 11) {
+                setCompanyNameError(true);
+              } else {
+                setCompanyNameError(false);
+              }
+              setCompanyName(e.target.value);
+            }}
+            maxLength={12}
           />
+          {companyNameError ? (
+            <span className="text-red-600">Company name cannot be bigger than 11 characters</span>
+          ) : null}
+
         </div>
         <div className="flex flex-col justify-center items-start">
           <label
@@ -111,8 +130,19 @@ export function AddContent() {
             id="jobInput"
             className="border-2 md:w-[400px] lg:w-[500px] w-[350px] outline-none bg-transparent p-3 text-white rounded-3xl duration-500"
             placeholder='"UI/UX Designer"'
-            onChange={(e) => setJobTitle(e.target.value)}
+            onChange={(e) => {
+              if (e.target.value.length > 19) {
+                setJobNameError(true);
+              } else {
+                setJobNameError(false);
+              }
+              setJobTitle(e.target.value);
+            }}
+            maxLength={20}
           />
+          {jobNameError ? (
+            <span className="text-red-600">Company name cannot be bigger than 11 characters</span>
+          ) : null}
         </div>
         <div className="flex flex-col justify-center items-start">
           <label
