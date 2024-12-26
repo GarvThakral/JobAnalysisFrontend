@@ -112,7 +112,7 @@ export function SignIn() {
             <input
               id="jobInput"
               className="border-2 md:w-[300px] lg:w-[400px] w-[300px] outline-none bg-transparent p-3 text-white rounded-3xl duration-500"
-              placeholder='"xyz@gmail.com"'
+              placeholder='password'
               onChange={(e) => setPassword(e.target.value)}
             />
             {passwordError ? <span className = "text-red-600">Password needs to be between 3-16 words</span>:null}

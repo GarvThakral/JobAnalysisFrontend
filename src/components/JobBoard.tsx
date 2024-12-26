@@ -76,6 +76,21 @@ export function JobBoard() {
                 </p>
             </div>
         </div>}
+        {jobs.length == 0 ? <div className = "flex self-center justify-center items-center ">
+          <div className={'text-white border h-[400px] max-w-[80%] sm:min-w-[600px] flex flex-col justify-around items-center p-8 rounded-lg shadow-[0_0_15px_rgba(52,152,219,0.7)]'}>
+                <span className="text-4xl sm:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 font-semibold p-2 ">
+                    No Jobs added yet
+                </span>
+                <Link to = "/addContent">
+                <span className="text-2xl text-white sm:text-4xl font-semibold p-3 bg-slate-700 w-fit rounded-2xl bg-opacity-45 border shadow-[0_0_15px_rgba(52,152,219,0.7)]">
+                    Add a job
+                </span>
+                </Link>
+                <p ref={typeRef} className={'text-lg sm:text-2xl'}>
+                    
+                </p>
+            </div>
+          </div>:null}
       {jobs.map((item: JobItem) => (
         <motion.div
           key={item.id}
