@@ -12,6 +12,8 @@ export function SignUp() {
   const [emailError,setEmailError] = useState(false); 
   const [usernameError,setUsernameError] = useState(false); 
   const [passwordError,setPasswordError] = useState(false); 
+  const [usernameTakenError,setusernameTakenError] = useState(false); 
+  const [emailTakenError,setemailTakenError] = useState(false); 
 
   useEffect(()=>{
       if(typeRef.current){
@@ -46,6 +48,8 @@ export function SignUp() {
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
   async function signUserUp(){
+    setemailTakenError(false)
+    setusernameTakenError(false)
     setEmailError(false);
     setUsernameError(false);
     setPasswordError(false);
@@ -60,6 +64,7 @@ export function SignUp() {
         navigate('/')
       }else if(response.status == 203){
         const issues = response.data.error.issues;
+        console.log(issues);
         issues.forEach((e: any) => {
           if (e.path.includes("email")) {
             setEmailError(true);
@@ -71,6 +76,15 @@ export function SignUp() {
             setUsernameError(true)
           }
         });
+      }else if(response.status == 204){
+        setemailTakenError(true);
+        setusernameTakenError(true);
+      }
+      else if(response.status == 205){
+        setusernameTakenError(true);
+      }
+      else if(response.status == 206){
+        setemailTakenError(true);
       }
     }catch(e){
       console.log(e);
@@ -96,6 +110,7 @@ export function SignUp() {
               onChange={(e) => setUsername(e.target.value)}
             />
             {usernameError ? <span className = "text-red-600">Username needs to be between 3-16 words</span>:null}
+            {usernameTakenError ? <span className = "text-red-600">Username is already taken</span>:null}
 
           </div>
           <div className="flex flex-col justify-center items-start">
@@ -112,6 +127,7 @@ export function SignUp() {
               onChange={(e) => setEmail(e.target.value)}
             />
             {emailError ? <span className = "text-red-600">Invalid email format</span>:null}
+            {emailTakenError ? <span className = "text-red-600">Email is already taken</span>:null}
 
           </div>
           <div className="flex flex-col justify-center items-start">
@@ -127,15 +143,14 @@ export function SignUp() {
               placeholder='"xyz@gmail.com"'
               onChange={(e) => setPassword(e.target.value)}
             />
-            {passwordError ? <span className = "text-red-600">Username needs to be between 3-16 words</span>:null}
+            {passwordError ? <span className = "text-red-600">Password needs to be between 3-16 words</span>:null}
 
           </div>
           <div className = "flex flex-col items-center self-center">
-          <div className="border-2 md:w-[200px] lg:w-[200px] w-[200px] outline-none bg-black bg-opacity-80 p-3 text-white rounded-3xl resize-y duration-500 my-5 flex justify-center cursor-pointer">
+          <div className="border-2 md:w-[200px] lg:w-[200px] w-[200px] outline-none bg-black bg-opacity-80 p-3 text-white rounded-3xl resize-y duration-500 my-5 flex justify-center cursor-pointer" onClick={() => signUserUp()}>
             <button
               className="bg-clip-text text-transparent bg-gradient-to-r from-[#1a73e8] via-[#673ab7] to-[#ff80ab]"
               type="submit"
-              onClick={() => signUserUp()}
             >
               Sign Up
             </button>

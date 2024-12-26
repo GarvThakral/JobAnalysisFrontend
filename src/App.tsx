@@ -7,6 +7,7 @@ import { SignUp } from './components/signup'
 import { SignIn } from './components/signin'
 import { AddContent } from './components/addContent'
 import { DashBoard } from './components/dashboard'
+import { Unauthorized } from './components/Unauthorized'
 function App() {
 
 return<BrowserRouter>
@@ -21,6 +22,7 @@ return<BrowserRouter>
           <Route path="/signup" element ={<SignUp/>} />
           <Route path="/signin" element ={<SignIn/>} />
           <Route path="/addContent" element ={<AddContent/>} />
+          <Route path="/unauthorized" element ={<Unauthorized/>} />
         </Routes>
       </div>
     </div>

@@ -11,7 +11,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 export function SignIn() {
   const typeRef = useRef(null);
-
+  
   const [usernameError,setUsernameError] = useState(false); 
   const [userError,setUserError] = useState(false); 
   const [passwordError,setPasswordError] = useState(false); 
@@ -118,11 +118,10 @@ export function SignIn() {
             {passwordError ? <span className = "text-red-600">Password needs to be between 3-16 words</span>:null}
           </div>
           <div className = {'flex flex-col items-center self-center'}>
-            <div className="border-2 md:w-[200px] lg:w-[200px] w-[200px] outline-none bg-black bg-opacity-80 p-3 text-white rounded-3xl resize-y duration-500 my-5 flex justify-center cursor-pointer">
+            <div className="border-2 md:w-[200px] lg:w-[200px] w-[200px] outline-none bg-black bg-opacity-80 p-3 text-white rounded-3xl resize-y duration-500 my-5 flex justify-center cursor-pointer" onClick={() => signUserIn()}>
               <button
                 className="bg-clip-text text-transparent bg-gradient-to-r from-[#1a73e8] via-[#673ab7] to-[#ff80ab]"
                 type="submit"
-                onClick={() => signUserIn()}
               >
                 Sign In
               </button>
@@ -130,7 +129,7 @@ export function SignIn() {
             <span ref = {typeRef} className = {"text-white p-5"}>
 
             </span>
-            <Link to = "/signup"><span className = {'text-purple-700 cursor-pointer p-5'}>Sign In ?</span></Link>
+            <Link to = "/signup"><span className = {'text-purple-700 cursor-pointer p-5'}>Sign Up?</span></Link>
           </div>
         </div>
     </div>

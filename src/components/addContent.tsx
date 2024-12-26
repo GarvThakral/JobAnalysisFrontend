@@ -3,27 +3,39 @@ import {
   companyNameState,
   jobTitleState,
   jobDescriptionState,
+  signin,
 } from "./atoms";
 import axios from "axios";
 import Select from "react-select";
 import { useEffect, useState } from "react";
 import { JobCard } from "./JobCard";
 import { Loader } from "./loader";
+import { useNavigate } from "react-router-dom";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 export function AddContent() {
+  
   const [toggleShort, setToggleShort] = useState(true);
-
+  const [signinState] = useRecoilState(signin);
+  
+  const navigate = useNavigate();
+  
   useEffect(() => {
+    if (!signinState) {
+      navigate('/');
+    }
+  
     const mediaQuery = window.matchMedia("(min-width: 870px)");
     const handleMediaChange = (e: MediaQueryListEvent) => {
-      setToggleShort(e.matches); 
+      setToggleShort(e.matches);
     };
     setToggleShort(mediaQuery.matches);
     mediaQuery.addEventListener("change", handleMediaChange);
+    
     return () => mediaQuery.removeEventListener("change", handleMediaChange);
-  }, []);
+  }, [signinState]); // Add signinState as a dependency
+  
 
   const [companyName, setCompanyName] = useRecoilState(companyNameState);
   const [jobTitle, setJobTitle] = useRecoilState(jobTitleState);
@@ -70,6 +82,7 @@ export function AddContent() {
   }
 
   return (
+    
     <div className="h-screen w-screen bg-[url('/bg-3.png')] bg-cover font-['Michroma'] flex justify-center">
       {loader ? <Loader/>:null}
       <div className="h-fit bg-transparent p-14 pt-32 flex flex-col md:items-start items-center">

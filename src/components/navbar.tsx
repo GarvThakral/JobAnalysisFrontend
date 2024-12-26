@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { signin } from "./atoms";
 import { useEffect, useState } from "react";
@@ -6,9 +6,11 @@ import { HamburgerIcon } from "../assets/hamburgerIcon";
 
 export function NavBar() {
   const [signinState,setSigninState] = useRecoilState(signin);
+  const navigate = useNavigate();
   function signout(){
     localStorage.clear();
     setSigninState(false);
+    navigate('/');
   }
   useEffect(() => {
     const handleResize = () => {
