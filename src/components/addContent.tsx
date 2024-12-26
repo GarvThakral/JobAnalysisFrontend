@@ -141,7 +141,7 @@ export function AddContent() {
             maxLength={20}
           />
           {jobNameError ? (
-            <span className="text-red-600">Company name cannot be bigger than 11 characters</span>
+            <span className="text-red-600">Job title cannot be bigger than 20 characters</span>
           ) : null}
         </div>
         <div className="flex flex-col justify-center items-start">
