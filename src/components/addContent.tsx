@@ -73,7 +73,7 @@ export function AddContent() {
         }
       );console.log(response)
       setLoader(false);
-      navigate('/')
+      navigate('/jobs')
     } catch (e) {
       console.log(e);
     }
@@ -205,11 +205,11 @@ export function AddContent() {
             ]}
           />
         </div>
-        <div className="border-2 md:w-[300px] lg:w-[400px] w-[200px] outline-none bg-black bg-opacity-80 p-4 text-white rounded-md resize-y duration-500 my-5 flex justify-center cursor-pointer">
+        <div onClick={() => handleAddJob()} className="border-2 md:w-[300px] lg:w-[400px] w-[200px] outline-none bg-black bg-opacity-80 p-4 text-white rounded-md resize-y duration-500 my-5 flex justify-center cursor-pointer">
           <button
             className="bg-clip-text text-transparent bg-gradient-to-r from-[#1a73e8] via-[#673ab7] to-[#ff80ab]"
             type="submit"
-            onClick={() => handleAddJob()}
+            
           >
             Create Job
           </button>
