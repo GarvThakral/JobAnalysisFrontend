@@ -90,19 +90,19 @@ export function AddContent() {
   
   return (
     
-    <div className="h-screen w-screen bg-[url('/bg-3.png')] bg-cover font-['Michroma'] flex justify-center">
+    <div className="h-screen w-screen bg-[url('/bg-grad-2.jpg')] bg-cover flex justify-center overflow-hidden">
       {loader ? <Loader/>:null}
       <div className="h-fit bg-transparent p-14 pt-32 flex flex-col md:items-start items-center">
         <div className="flex flex-col justify-center items-start">
           <label
             htmlFor="companyInput"
-            className="text-white p-3 text-xl animate-pulse"
+            className="text-white py-4 text-2xl animate-pulse"
           >
             Company Title
           </label>
           <input
             id="companyInput"
-            className="border-2 md:w-[400px] lg:w-[500px] w-[350px] outline-none bg-transparent p-3 text-white rounded-3xl duration-500"
+            className="border-2 md:w-[400px] lg:w-[500px] w-[350px] outline-none bg-transparent p-4 text-white rounded-md duration-500"
             placeholder="Google"
             onChange={(e) => {
               if (e.target.value.length > 11) {
@@ -122,13 +122,13 @@ export function AddContent() {
         <div className="flex flex-col justify-center items-start">
           <label
             htmlFor="jobInput"
-            className="text-white p-3 text-xl animate-pulse"
+            className="text-white py-4 text-2xl animate-pulse"
           >
             Job Title
           </label>
           <input
             id="jobInput"
-            className="border-2 md:w-[400px] lg:w-[500px] w-[350px] outline-none bg-transparent p-3 text-white rounded-3xl duration-500"
+            className="border-2 md:w-[400px] lg:w-[500px] w-[350px] outline-none bg-transparent p-4 text-white rounded-md duration-500"
             placeholder='"UI/UX Designer"'
             onChange={(e) => {
               if (e.target.value.length > 19) {
@@ -147,13 +147,13 @@ export function AddContent() {
         <div className="flex flex-col justify-center items-start">
           <label
             htmlFor="jobDescInput"
-            className="text-white p-3 text-xl animate-pulse"
+            className="text-white py-4 text-2xl animate-pulse"
           >
             Job Description
           </label>
           <textarea
             id="jobDescInput"
-            className="border-2 md:w-[400px] lg:w-[500px] w-[350px] outline-none bg-transparent p-3 text-white rounded-3xl resize-y duration-500"
+            className="border-2 md:w-[400px] lg:w-[500px] w-[350px] outline-none bg-transparent p-4 text-white rounded-md resize-y duration-500"
             placeholder={placeHolderDesc}
             onChange={(e) => setJobDescription(e.target.value)}
           ></textarea>
@@ -161,7 +161,7 @@ export function AddContent() {
         <div className="flex flex-col justify-center items-start">
           <label
             htmlFor="jobStatusSelect"
-            className="text-white p-3 text-xl animate-pulse"
+            className="text-white py-4 text-2xl animate-pulse"
           >
             Job Status
           </label>
@@ -173,7 +173,7 @@ export function AddContent() {
                 border: "2px solid white",
                 backgroundColor: "transparent",
                 padding: "12px",
-                borderRadius: "1.5rem",
+                borderRadius: ".5rem",
                 color: "white",
                 width: "100%",
                 minHeight: "48px",
@@ -205,7 +205,7 @@ export function AddContent() {
             ]}
           />
         </div>
-        <div className="border-2 md:w-[300px] lg:w-[400px] w-[200px] outline-none bg-black bg-opacity-80 p-3 text-white rounded-3xl resize-y duration-500 my-5 flex justify-center cursor-pointer">
+        <div className="border-2 md:w-[300px] lg:w-[400px] w-[200px] outline-none bg-black bg-opacity-80 p-4 text-white rounded-md resize-y duration-500 my-5 flex justify-center cursor-pointer">
           <button
             className="bg-clip-text text-transparent bg-gradient-to-r from-[#1a73e8] via-[#673ab7] to-[#ff80ab]"
             type="submit"
