@@ -73,7 +73,7 @@ export function AddContent() {
         }
       );
       setLoader(false);
-      console.log(response);
+      navigate('/')
     } catch (e) {
       console.log(e);
     }
