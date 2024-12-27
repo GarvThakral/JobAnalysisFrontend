@@ -71,7 +71,7 @@ export function AddContent() {
             token: token,
           },
         }
-      );
+      );console.log(response)
       setLoader(false);
       navigate('/')
     } catch (e) {
