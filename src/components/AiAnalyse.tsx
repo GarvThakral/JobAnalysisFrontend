@@ -1,10 +1,24 @@
 import axios from "axios";
 import { useState } from "react";
+import { Loader } from "./loader";
 const API_URL = import.meta.env.VITE_API_URL;
 
 interface JobProps {
     description: string;
+    title: string;
 }
+interface InterviewQuestionAnalysis {
+    interview_tips: Array<string>;
+    qa_pairs: Array<{
+        question: string;
+        answer: string;
+    }>;
+    common_mistakes_to_avoid:Array<string>;
+
+    required_documents: Array<string>;
+    job_title: string;
+}
+
 
 interface DescriptionAnalysis {
     description_analysis: string;
@@ -25,6 +39,10 @@ export function AiAnalysis(props: JobProps) {
     const [uploadStatus, setUploadStatus] = useState<string>("");
     const [resumeDetail, setResume] = useState<ResumeAnalysis | null>(null);
     const [analysisDetail, setAnalysis] = useState<DescriptionAnalysis | null>(null);
+    const [interviewDetail, setInterviewDetail] = useState<InterviewQuestionAnalysis | null>(null);
+    const [loader,setLoader] = useState(false);
+
+    const token = localStorage.getItem('token')
 
     const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -68,7 +86,7 @@ export function AiAnalysis(props: JobProps) {
     };
 
     async function analyseDesc() {
-        const token = localStorage.getItem('token')
+        setLoader(true);
         try {
             const analysis = await axios.post(`${API_URL}ai/analyzeDescription`, {
                 headers: {
@@ -76,18 +94,39 @@ export function AiAnalysis(props: JobProps) {
                 },
                 description: props.description,
             });
+            setLoader(false);
             setAnalysis(analysis.data);
         } catch (error) {
+            setLoader(false);
+            console.error("Error analyzing description:", error);
+        }
+    }
+    async function interviewPrep(){
+        setLoader(true);
+        try {
+            const analysis = await axios.post(`${API_URL}ai/interviewPrep`, {
+                headers: {
+                    token
+                },
+                jobTitle:props.title,
+                jobDescription: props.description,
+            });
+            setLoader(false);
+            setInterviewDetail(analysis.data);
+            console.log(analysis)
+        } catch (error) {
+            setLoader(false);
             console.error("Error analyzing description:", error);
         }
     }
 
     return (
-        <div className="p-8 overflow-auto w-full flex flex-col items-center ">
+        <div className="p-8 overflow-auto w-full flex flex-col items-center space-y-14 ">
+            {loader ? <Loader/>:null}
             <div className="space-y-4 flex flex-col items-center">
                 <button
                     onClick={analyseDesc}
-                    className="text-3xl p-2 text-transparent bg-clip-text bg-gradient-to-r from-[#1a73e8] via-[#8759d8] to-[#ff91b5] mt-5 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all"
+                    className="text-3xl p-2 text-transparent bg-clip-text bg-gradient-to-r from-[#1a73e8] via-[#8759d8] to-[#ff91b5] rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all"
                 >
                     Analyze Description
                 </button>
@@ -123,7 +162,8 @@ export function AiAnalysis(props: JobProps) {
                     </div>
                 )}
             </div>
-            <div className="mt-10 flex flex-col items-center">
+            
+            <div className="space-y-4 flex flex-col items-center">
                 <label
                     htmlFor="resume-upload"
                     className="cursor-pointer text-3xl p-2 text-transparent bg-clip-text bg-gradient-to-r from-[#1a73e8] via-[#8759d8] to-[#ff91b5] rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all"
@@ -188,6 +228,43 @@ export function AiAnalysis(props: JobProps) {
                         </div>
 
                        
+                    </div>
+                )}
+            </div>
+            <div className="space-y-4 flex flex-col items-center">
+                <button
+                    onClick={interviewPrep}
+                    className="text-3xl p-2 text-transparent bg-clip-text bg-gradient-to-r from-[#1a73e8] via-[#8759d8] to-[#ff91b5] rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all"
+                >
+                    Interview Preperation
+                </button>
+
+                {interviewDetail && (
+                    <div className="text-white flex flex-col items-center space-y-4">
+                        <h3 className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#1a73e8] via-[#8759d8] to-[#ff91b5]">Common Questions</h3>
+                        {interviewDetail?.qa_pairs.map((item,index)=>{
+                            return<div key = {index} className = "mr-auto">
+                                <p className = {"text-xl text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-green-300"}>Q-{index+1} {item.question}</p><br></br>
+                                <p><span className = "text-blue-600">[Ans]</span>  {item.answer}</p>
+                            </div>
+                        })}
+                        <h3 className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#1a73e8] via-[#8759d8] to-[#ff91b5]">Interview Tips</h3>
+                        <ul className="text-gray-600 space-y-1">
+                            {interviewDetail.interview_tips.map((item, idx) => (
+                                <li key={idx} className="list-disc list-inside w-fit py-1 text-white">
+                                    {item}
+                                </li>
+                            ))}
+                        </ul>
+                        <h3 className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#1a73e8] via-[#8759d8] to-[#ff91b5]">Common mistakes</h3>
+                        <ul className="text-gray-600 space-y-1">
+                            {interviewDetail.common_mistakes_to_avoid.map((item, idx) => (
+                                <li key={idx} className="list-disc list-inside w-fit py-1 text-white">
+                                    {item}
+                                </li>
+                            ))}
+                        </ul>
+
                     </div>
                 )}
             </div>
